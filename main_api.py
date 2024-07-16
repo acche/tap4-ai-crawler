@@ -101,8 +101,9 @@ async def async_worker(url, tags, languages, callback_url, key):
     try:
         logger.info(f'callback begin:{callback_url}')
         logger.info(f'Authorization ={key}')
-        response = requests.post(callback_url, json=result, headers={'Authorization': 'Bearer ' + key})
-        logger.info(f'response ={response}')
+        header = {'Authorization': 'Bearer ' + key}
+        logger.info(f'header ={header}')
+        response = requests.post(callback_url, json=result, headers=header)
         if response.status_code != 200:
             logger.error(f'callback error:{callback_url}', response.text)
         else:
